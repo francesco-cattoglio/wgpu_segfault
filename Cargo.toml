@@ -1,0 +1,75 @@
+[package]
+name = "franzplot-compute"
+version = "21.4.0"
+authors = ["francesco.cattoglio <francesco.cattoglio@gmail.com>"]
+edition = "2018"
+
+[[bin]]
+name = "franzplot"
+path = "src/main.rs"
+
+[features]
+show-timestamps = []
+dev-tools = []
+all = ["show-timestamps", "dev-tools"]
+
+[dependencies]
+chrono = { version = "0.4", features = ["serde"] }
+bytemuck = "1.2"
+wgpu = { git = 'https://github.com/gfx-rs/wgpu-rs.git', rev = '53600ecd834893ef3e90458c48b84f2582d6c343', features = ["cross"] }
+#wgpu = { version = "0.7", features = ["trace"] }
+shaderc = "0.6"
+num-iter = "0.1"
+anyhow = "1.0"
+futures = {version="0.3.10",features=["thread-pool"]}
+glam = "0.11"
+maplit = "1.0"
+winit = "0.24"
+tobj = "2.0"
+image = "0.23"
+png = "0.16.8"
+smol_str = { version = "0.1", features = ["serde"] }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+ron = "0.6.4"
+clap = "2.33"
+obj = "0.10"
+imgui = "0.7.0"
+imgui-winit-support = "0.7.0"
+imgui-wgpu = { git = 'https://github.com/francesco-cattoglio/imgui-wgpu-rs.git', rev = '63d1b0d57fd2910be78ff72645973071ef25b91a' }
+wgpu-subscriber = "0.1"
+cxx = "1.0.32"
+pathfinding = "2.0"
+indexmap = "1.6"
+rand = "0.8"
+hexasphere = "3.1"
+rfd = "0.2.2"
+pest = "2.1"
+pest_derive = "2.1"
+
+[build-dependencies]
+cxx-build = "1.0"
+
+[target.'cfg(windows)'.build-dependencies]
+winres = "0.1"
+
+[profile.release]
+debug = true
+
+[profile.dev.package.image]
+opt-level = 2
+
+[patch.crates-io]
+
+#[patch."https://github.com/gfx-rs/wgpu"]
+#wgpu-types = { path = "../wgpu/wgpu-types" }
+#wgpu-core = { path = "../wgpu/wgpu-core" }
+
+#[patch."https://github.com/gfx-rs/gfx"]
+#gfx-hal = { path = "../gfx/src/hal" }
+#gfx-backend-empty = { path = "../gfx/src/backend/empty" }
+#gfx-backend-vulkan = { path = "../gfx/src/backend/vulkan" }
+#gfx-backend-gl = { path = "../gfx/src/backend/gl" }
+#gfx-backend-dx12 = { path = "../gfx/src/backend/dx12" }
+#gfx-backend-dx11 = { path = "../gfx/src/backend/dx11" }
+#gfx-backend-metal = { path = "../gfx/src/backend/metal" }
